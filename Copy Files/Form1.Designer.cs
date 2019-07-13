@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.txtBoxFolderPath = new System.Windows.Forms.TextBox();
             this.btnOpenFolder = new System.Windows.Forms.Button();
@@ -82,8 +83,11 @@
             this.Controls.Add(this.btnDeleteEverything);
             this.Controls.Add(this.btnOpenFolder);
             this.Controls.Add(this.txtBoxFolderPath);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Kopiuj zdjęcia";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -18,7 +18,7 @@ namespace Copy_Files
         private readonly string _folderPathKey = "PathFolder";
         private readonly string _registrySubKey = @"SOFTWARE\Owik\CopyImages";
 
-        private string _folderPath;
+        private string _folderPathDestiny;
 
         public Form1()
         {
@@ -28,8 +28,63 @@ namespace Copy_Files
 
         private void Init()
         {
-            _folderPath = LoadPathFromRegistry(_folderPathKey);
-            txtBoxFolderPath.Text = _folderPath;
+            try
+            {
+                _folderPathDestiny = LoadPathFromRegistry(_folderPathKey);
+                txtBoxFolderPath.Text = _folderPathDestiny;
+
+                string[] args = Environment.GetCommandLineArgs();
+                if (args.Length > 1)
+                {
+                    CopyFileToPathFolderDestiny(args[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                GetError(ex);
+            }
+        }
+
+        private void CopyFileToPathFolderDestiny(string argsPath)
+        {
+            try
+            {
+                string fileName = Path.GetFileName(argsPath);
+                string destiny = Path.Combine(_folderPathDestiny, fileName);
+
+                bool fileExist = File.Exists(destiny);
+
+                if (fileExist)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Ten plik już został dodany. Czy chcesz dodać go ponownie?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(argsPath);
+                        string extension = Path.GetExtension(argsPath);
+                        fileNameWithoutExtension += Guid.NewGuid();
+                        fileName = fileNameWithoutExtension;
+                        fileName += extension;
+                        destiny = Path.Combine(_folderPathDestiny, fileName);
+                    }
+                    else
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+
+                File.Copy(argsPath, destiny);
+
+
+                MessageBox.Show("Dodano plik!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                GetError(ex);
+            }
+
+            Environment.Exit(0);
         }
 
         private void GetError(Exception ex)
@@ -43,9 +98,9 @@ namespace Copy_Files
             {
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    _folderPath = folderBrowserDialog.SelectedPath;
-                    txtBoxFolderPath.Text = _folderPath;
-                    SavePathToRegistry(_folderPathKey, _folderPath);
+                    _folderPathDestiny = folderBrowserDialog.SelectedPath;
+                    txtBoxFolderPath.Text = _folderPathDestiny;
+                    SavePathToRegistry(_folderPathKey, _folderPathDestiny);
                 }
             }
             catch (Exception ex)
@@ -93,7 +148,7 @@ namespace Copy_Files
         {
             try
             {
-                Process.Start(_folderPath);
+                Process.Start(_folderPathDestiny);
             }
             catch (Exception ex)
             {
@@ -116,14 +171,14 @@ namespace Copy_Files
 
                 GetError(ex);
             }
-            
+
         }
 
         private void DeleteAllFiles()
         {
             try
             {
-                DirectoryInfo directoryInfo = new DirectoryInfo(_folderPath);
+                DirectoryInfo directoryInfo = new DirectoryInfo(_folderPathDestiny);
 
                 foreach (FileInfo file in directoryInfo.GetFiles())
                 {
