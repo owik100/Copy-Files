@@ -60,12 +60,18 @@ namespace Copy_Files
                     DialogResult dialogResult = MessageBox.Show("Ten plik już został dodany. Czy chcesz dodać go ponownie?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(argsPath);
-                        string extension = Path.GetExtension(argsPath);
-                        fileNameWithoutExtension += Guid.NewGuid();
-                        fileName = fileNameWithoutExtension;
-                        fileName += extension;
-                        destiny = Path.Combine(_folderPathDestiny, fileName);
+                        while (fileExist)
+                        {
+                            Random random = new Random();
+                            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(argsPath);
+                            string extension = Path.GetExtension(argsPath);
+                            fileNameWithoutExtension += random.Next(1, 1000);
+                            fileName = fileNameWithoutExtension;
+                            fileName += extension;
+                            destiny = Path.Combine(_folderPathDestiny, fileName);
+
+                            fileExist = File.Exists(destiny);
+                        }               
                     }
                     else
                     {
