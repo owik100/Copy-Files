@@ -28,13 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.txtBoxFolderPath = new System.Windows.Forms.TextBox();
+            this.btnOpenFolder = new System.Windows.Forms.Button();
+            this.btnDeleteEverything = new System.Windows.Forms.Button();
+            this.btnChooseFolder = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // txtBoxFolderPath
+            // 
+            this.txtBoxFolderPath.Location = new System.Drawing.Point(189, 21);
+            this.txtBoxFolderPath.Name = "txtBoxFolderPath";
+            this.txtBoxFolderPath.Size = new System.Drawing.Size(336, 20);
+            this.txtBoxFolderPath.TabIndex = 0;
+            // 
+            // btnOpenFolder
+            // 
+            this.btnOpenFolder.Location = new System.Drawing.Point(21, 51);
+            this.btnOpenFolder.Name = "btnOpenFolder";
+            this.btnOpenFolder.Size = new System.Drawing.Size(504, 24);
+            this.btnOpenFolder.TabIndex = 2;
+            this.btnOpenFolder.Text = "Otwórz folder";
+            this.btnOpenFolder.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteEverything
+            // 
+            this.btnDeleteEverything.Location = new System.Drawing.Point(21, 81);
+            this.btnDeleteEverything.Name = "btnDeleteEverything";
+            this.btnDeleteEverything.Size = new System.Drawing.Size(504, 24);
+            this.btnDeleteEverything.TabIndex = 3;
+            this.btnDeleteEverything.Text = "Usuń wszystko z folderu";
+            this.btnDeleteEverything.UseVisualStyleBackColor = true;
+            // 
+            // btnChooseFolder
+            // 
+            this.btnChooseFolder.Location = new System.Drawing.Point(21, 18);
+            this.btnChooseFolder.Name = "btnChooseFolder";
+            this.btnChooseFolder.Size = new System.Drawing.Size(162, 24);
+            this.btnChooseFolder.TabIndex = 4;
+            this.btnChooseFolder.Text = "Wybierz folder docelowy";
+            this.btnChooseFolder.UseVisualStyleBackColor = true;
+            this.btnChooseFolder.Click += new System.EventHandler(this.BtnChooseFolder_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(537, 118);
+            this.Controls.Add(this.btnChooseFolder);
+            this.Controls.Add(this.btnDeleteEverything);
+            this.Controls.Add(this.btnOpenFolder);
+            this.Controls.Add(this.txtBoxFolderPath);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private System.Windows.Forms.TextBox txtBoxFolderPath;
+        private System.Windows.Forms.Button btnOpenFolder;
+        private System.Windows.Forms.Button btnDeleteEverything;
+        private System.Windows.Forms.Button btnChooseFolder;
     }
 }
 
