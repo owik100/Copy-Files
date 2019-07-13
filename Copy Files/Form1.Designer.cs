@@ -39,6 +39,7 @@
             // 
             this.txtBoxFolderPath.Location = new System.Drawing.Point(189, 21);
             this.txtBoxFolderPath.Name = "txtBoxFolderPath";
+            this.txtBoxFolderPath.ReadOnly = true;
             this.txtBoxFolderPath.Size = new System.Drawing.Size(336, 20);
             this.txtBoxFolderPath.TabIndex = 0;
             // 
@@ -50,6 +51,7 @@
             this.btnOpenFolder.TabIndex = 2;
             this.btnOpenFolder.Text = "Otwórz folder";
             this.btnOpenFolder.UseVisualStyleBackColor = true;
+            this.btnOpenFolder.Click += new System.EventHandler(this.BtnOpenFolder_Click);
             // 
             // btnDeleteEverything
             // 
@@ -59,6 +61,7 @@
             this.btnDeleteEverything.TabIndex = 3;
             this.btnDeleteEverything.Text = "Usuń wszystko z folderu";
             this.btnDeleteEverything.UseVisualStyleBackColor = true;
+            this.btnDeleteEverything.Click += new System.EventHandler(this.BtnDeleteEverything_Click);
             // 
             // btnChooseFolder
             // 
